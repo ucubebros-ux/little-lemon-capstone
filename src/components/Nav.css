@@ -1,0 +1,66 @@
+/* Navigation Component Styles */
+.nav {
+  background-color: var(--white);
+  border-bottom: 2px solid var(--primary-yellow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.nav .container {
+  padding: 0 20px;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  padding: 15px 0;
+  margin: 0;
+  justify-content: flex-start;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--primary-green);
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-link:hover {
+  background-color: var(--secondary-light);
+  color: var(--primary-green);
+}
+
+.nav-link:focus {
+  outline: 2px solid var(--primary-yellow);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .nav-list {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-list {
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .nav-link {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}

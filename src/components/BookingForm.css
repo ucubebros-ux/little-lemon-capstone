@@ -1,0 +1,159 @@
+/* BookingForm Component Styles */
+.booking-form {
+  background: var(--white);
+  padding: 40px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+fieldset:last-of-type {
+  margin-bottom: 30px;
+}
+
+legend {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--secondary-dark);
+  font-size: 14px;
+}
+
+.required {
+  color: #D32F2F;
+  margin-left: 4px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #DDDDDD;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  font-family: inherit;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(73, 94, 87, 0.1);
+}
+
+.form-group input:invalid,
+.form-group select:invalid {
+  border-color: #D32F2F;
+}
+
+.form-group input:valid,
+.form-group select:valid {
+  border-color: #4CAF50;
+}
+
+.error-message {
+  display: block;
+  color: #D32F2F;
+  font-size: 13px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.error-alert {
+  background-color: #FFEBEE;
+  border: 2px solid #D32F2F;
+  color: #B71C1C;
+  padding: 12px 16px;
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .booking-form {
+    padding: 30px 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  legend {
+    font-size: 18px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 16px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-form {
+    padding: 20px 15px;
+  }
+
+  legend {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  fieldset {
+    margin-bottom: 25px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

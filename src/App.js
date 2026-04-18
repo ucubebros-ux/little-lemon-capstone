@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+import React, { useReducer } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
+import Header from './components/Header';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import BookingPage from './pages/BookingPage';
+import ConfirmedBooking from './pages/ConfirmedBooking';
+import { initializeTimes, updateTimes } from './utils/bookingUtils';
 
 function App() {
+  const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Nav />
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route 
+            path="/booking" 
+            element={<BookingPage availableTimes={availableTimes} dispatch={dispatch} />} 
+          />
+          <Route path="/confirmed" element={<ConfirmedBooking />} />
+        </Routes>
+      </main>
+      <Footer />
+    </Router>
   );
 }
 
