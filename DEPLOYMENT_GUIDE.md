@@ -22,9 +22,10 @@ Before deploying, ensure:
 ✅ npm or yarn installed  
 ✅ Git configured  
 ✅ Access to hosting platform  
-✅ Production build tested locally  
+✅ Production build tested locally
 
 ### Verify Prerequisites
+
 ```bash
 node --version     # Should be v14.0.0 or higher
 npm --version      # Should be v6.0.0 or higher
@@ -44,6 +45,7 @@ npm run build         # Create production build
 ```
 
 Expected output:
+
 ```
 The build folder is ready to be deployed.
 File sizes after gzip:
@@ -79,6 +81,7 @@ Access at: `http://localhost:3000`
 ### Method 1: Via GitHub Integration
 
 1. **Push to GitHub**
+
 ```bash
 git add .
 git commit -m "Little Lemon app ready for deployment"
@@ -107,11 +110,13 @@ git push origin main
 ### Method 2: Via Vercel CLI
 
 1. **Install Vercel CLI**
+
 ```bash
 npm install -g vercel
 ```
 
 2. **Deploy**
+
 ```bash
 cd little-lemon
 vercel
@@ -154,16 +159,19 @@ vercel
 ### Method 2: Via Netlify CLI
 
 1. **Install Netlify CLI**
+
 ```bash
 npm install -g netlify-cli
 ```
 
 2. **Login to Netlify**
+
 ```bash
 netlify login
 ```
 
 3. **Deploy**
+
 ```bash
 cd little-lemon
 netlify deploy --prod --dir=build
@@ -172,6 +180,7 @@ netlify deploy --prod --dir=build
 ### Method 3: Drag & Drop
 
 1. **Create Production Build**
+
 ```bash
 npm run build
 ```
@@ -188,12 +197,14 @@ npm run build
 ### On Ubuntu/Debian Server
 
 1. **Install Node.js**
+
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
 2. **Clone Repository**
+
 ```bash
 cd /var/www
 git clone <your-repo-url> little-lemon
@@ -201,17 +212,20 @@ cd little-lemon
 ```
 
 3. **Install Dependencies**
+
 ```bash
 npm ci --production
 npm run build
 ```
 
 4. **Install PM2 (Process Manager)**
+
 ```bash
 sudo npm install -g pm2
 ```
 
 5. **Serve with PM2**
+
 ```bash
 pm2 start "npx serve -s build -l 3000" --name "little-lemon"
 pm2 startup
@@ -221,6 +235,7 @@ pm2 save
 6. **Configure Nginx Reverse Proxy**
 
 Create `/etc/nginx/sites-available/little-lemon`:
+
 ```nginx
 server {
     listen 80;
@@ -242,6 +257,7 @@ server {
 ```
 
 Enable site:
+
 ```bash
 sudo ln -s /etc/nginx/sites-available/little-lemon /etc/nginx/sites-enabled/
 sudo nginx -t
@@ -249,6 +265,7 @@ sudo systemctl restart nginx
 ```
 
 7. **Enable HTTPS with Let's Encrypt**
+
 ```bash
 sudo apt-get install certbot python3-certbot-nginx
 sudo certbot --nginx -d yourdomain.com
@@ -261,6 +278,7 @@ sudo certbot --nginx -d yourdomain.com
 ### 1. Create Dockerfile
 
 Create `Dockerfile` in project root:
+
 ```dockerfile
 # Build stage
 FROM node:18-alpine AS builder
@@ -329,12 +347,15 @@ REACT_APP_API_KEY=your_api_key_here
 ### Setting Environment Variables
 
 **Vercel:**
+
 - Settings → Environment Variables → Add
 
 **Netlify:**
+
 - Site settings → Build & deploy → Environment → Add variables
 
 **Server:**
+
 ```bash
 export REACT_APP_API_URL=https://api.yourdomain.com
 npm run build
@@ -347,21 +368,25 @@ npm run build
 ### Before Deployment
 
 1. **Check Bundle Size**
+
 ```bash
 npm run build
 # Verify bundle sizes are reasonable
 ```
 
 2. **Optimize Images**
+
 - Replace emoji with actual images (optional)
 - Use WebP format for images
 - Optimize with ImageOptim or similar
 
 3. **Enable Gzip Compression**
+
 - Most hosting platforms enable by default
 - Verify in nginx/Apache configuration
 
 4. **Set Cache Headers**
+
 - Static assets: Cache for 1 year
 - HTML files: Cache for 1 day
 
@@ -391,6 +416,7 @@ npm run build
    - Wait for propagation (24-48 hours)
 
 3. **Verify DNS**
+
 ```bash
 nslookup yourdomain.com
 # Should show your hosting provider's nameservers
@@ -409,6 +435,7 @@ nslookup yourdomain.com
 ### Manual Certificate
 
 For traditional servers:
+
 ```bash
 sudo certbot certonly --webroot -w /var/www -d yourdomain.com
 ```
@@ -472,6 +499,7 @@ curl -w "\n%{time_total}\n" -o /dev/null -s https://yourdomain.com
 ### 5. Cross-Browser Testing
 
 Test on:
+
 - [ ] Chrome (latest)
 - [ ] Firefox (latest)
 - [ ] Safari (latest)
@@ -481,6 +509,7 @@ Test on:
 ### 6. Mobile Testing
 
 Test on:
+
 - [ ] iPhone
 - [ ] Android phone
 - [ ] Tablet
@@ -523,6 +552,7 @@ Test on:
 ### Issue: Build Fails on Deploy
 
 **Solution:**
+
 ```bash
 # Clear cache and rebuild locally
 rm -rf build node_modules
@@ -536,11 +566,13 @@ npm run build
 
 **Vercel**: Automatic ✅  
 **Netlify**: Create `_redirects`:
+
 ```
 /* /index.html 200
 ```
 
 **Server**: Update nginx config:
+
 ```nginx
 try_files $uri $uri/ /index.html;
 ```
@@ -548,6 +580,7 @@ try_files $uri $uri/ /index.html;
 ### Issue: Slow Load Times
 
 **Solution:**
+
 1. Enable Gzip compression
 2. Optimize images
 3. Use CDN
@@ -557,6 +590,7 @@ try_files $uri $uri/ /index.html;
 ### Issue: Memory Issues on Server
 
 **Solution:**
+
 ```bash
 # Increase Node memory limit
 export NODE_OPTIONS="--max-old-space-size=2048"
@@ -570,15 +604,18 @@ npm run build
 ### If Deployment Fails
 
 **Vercel:**
+
 - Go to Deployments
 - Click rollback arrow on previous successful deploy
 
 **Netlify:**
+
 - Go to Deploys
 - Click on previous successful deploy
 - Click "Restore"
 
 **Server:**
+
 ```bash
 cd /var/www/little-lemon
 git revert HEAD
@@ -610,11 +647,13 @@ Before going live:
 ## Support Resources
 
 ### Documentation
+
 - [Create React App Deployment](https://create-react-app.dev/deployment/)
 - [Vercel Deployment Docs](https://vercel.com/docs)
 - [Netlify Deployment Docs](https://docs.netlify.com/)
 
 ### Community Help
+
 - Stack Overflow
 - GitHub Issues
 - React Documentation
@@ -625,26 +664,31 @@ Before going live:
 ## Quick Reference
 
 ### Build Command
+
 ```bash
 npm run build
 ```
 
 ### Start Development
+
 ```bash
 npm start
 ```
 
 ### Run Tests
+
 ```bash
 npm test -- --watchAll=false
 ```
 
 ### Deploy to Vercel
+
 ```bash
 vercel --prod
 ```
 
 ### Deploy to Netlify
+
 ```bash
 netlify deploy --prod --dir=build
 ```
